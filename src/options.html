@@ -8,10 +8,14 @@
     <link rel="stylesheet" type="text/css" href="stylesheet/bootstrap.css">
   </head>
   <body>
-  <div class="container">
-    <h3>To Use NHK Notification. please get apikey.</h3>
-    <input type="textarea" id="api_key">
-    <button type="button" class="btn btn-success" id="save">save</button>
-  </div>
+    <div class="container">
+      <h4>To use NHK notification. Please get apikey from <a href="http://api-portal.nhk.or.jp/ja">here</a>, and set below.</h3>
+      <form class="form-inline" role="form">
+        <div class="form-group">
+          <input type="password" class="form-control" id="api_key" placeholder="set api key">
+        </div>
+      <button type="submit" class="btn btn-success" id="save">save</button>
+      </form>
+    </div>
   </body>
 </html>
