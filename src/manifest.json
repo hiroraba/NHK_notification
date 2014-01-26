@@ -10,13 +10,15 @@
   },
   "background": {
     "persistent": true,
-    "scripts": ["javascript/jquery-1.10.2.min.js", "javascript/bg.js"]
+    "scripts": ["javascript/jquery-1.10.2.min.js", "javascript/contents.js"]
   },
   "permissions": [
-    "tabs"
+    "tabs",
+    "http://*/"
   ],
   "browser_action": {
     "default_icon": "images/icon19.png",
     "default_popup": "popup.html"
-  }
+  },
+  "options_page": "options.html"
 }
