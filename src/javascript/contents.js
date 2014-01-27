@@ -17,7 +17,7 @@
 
   pollingProgram: function() {
     var self = this;
-    setInterval(function(){ self.noticeProgram(); }, 1000 * 60);
+    setInterval(function(){ self.noticeProgram(); }, 1000 * 30);
   },
 
   getNowOnair: function() {
@@ -53,7 +53,7 @@
     for (var i = 0 ; i < this.program.length; i++) {
       var diff = Math.abs(now - this.program[i]["start_time"]);
       if (diff < 1000 * 60 && this.program[i]["notice"] == 0) {
-        this.program[i]["notice"] == 1;
+        this.program[i]["notice"] = 1;
         self.sendNotification(this.program[i]["icon"], this.program[i]["title"], this.program[i]["subtitle"]);
       }
     }
@@ -89,7 +89,7 @@
            self.saveNHKprogram(msg);
          } else if (key == "nowonair_list") {
            var title = msg.nowonair_list.g1.present.title;
-           var icon = msg.nowonair_list.g1.present.service.logo_s.url;
+           var icon = msg.nowonair_list.g1.present.service.logo_m.url;
            var subtitle = msg.nowonair_list.g1.present.subtitle;
            self.sendNotification(icon, title, subtitle);
          }
