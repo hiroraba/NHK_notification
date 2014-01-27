@@ -43,7 +43,7 @@
       this.program[i]["subtitle"] = program_array[i].subtitle;
       this.program[i]["icon"] = program_array[i].service.logo_m.url;
       this.program[i]["start_time"] = Date.parse(program_array[i].start_time);
-      this.program[i]["notice"] = Date.parse(program_array[i].start_time);
+      this.program[i]["notice"] = 0;
     }
   },
 
