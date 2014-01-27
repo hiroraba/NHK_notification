@@ -43,6 +43,7 @@
       this.program[i]["subtitle"] = program_array[i].subtitle;
       this.program[i]["icon"] = program_array[i].service.logo_m.url;
       this.program[i]["start_time"] = Date.parse(program_array[i].start_time);
+      this.program[i]["notice"] = 0;
     }
   },
 
@@ -50,9 +51,9 @@
     var self = this;
     var now = new Date();
     for (var i = 0 ; i < this.program.length; i++) {
-      var diff = now - this.program[i]["start_time"];
-      if (-1 * 1000 * 60 <= diff <= 0) {
-        console.log("MATCH" + this.program[i]["title"]);
+      var diff = Math.abs(now - this.program[i]["start_time"]);
+      if (diff < 1000 * 60 && this.program[i]["notice"] == 0) {
+        this.program[i]["notice"] == 1;
         self.sendNotification(this.program[i]["icon"], this.program[i]["title"], this.program[i]["subtitle"]);
       }
     }
