@@ -50,10 +50,10 @@
     var self = this;
     var now = new Date();
     for (var i = 0 ; i < this.program.length; i++) {
-      var diff = Math.abs(now - this.program[i]["start_time"]);
-      console.log(diff);
-      if (diff <= 1000 * 60) {
-      self.sendNotification(this.program[i]["icon"], this.program[i]["title"], this.program[i]["subtitle"]);
+      var diff = now - this.program[i]["start_time"];
+      if (-1 * 1000 * 60 <= diff <= 0) {
+        console.log("MATCH" + this.program[i]["title"]);
+        self.sendNotification(this.program[i]["icon"], this.program[i]["title"], this.program[i]["subtitle"]);
       }
     }
   },
