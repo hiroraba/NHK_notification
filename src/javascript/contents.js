@@ -18,7 +18,7 @@
     });
   },
 
-  getNowOnair: function(service) {
+  getNowOnair: function() {
     var self = this;
     var url_now = this.base_url_now + "/" + this.area + "/" + this.service + ".json";
     $("#nhk").click(function(){
@@ -39,13 +39,17 @@
   },
 
   saveNHKprogram: function(program) {
-    for (var i = this.program.length ; i < program.length; i++) {
-      this.program[i] = {};
-      this.program[i]["title"] = program[i].title;
-      this.program[i]["subtitle"] = program[i].subtitle;
-      this.program[i]["icon"] = program[i].service.logo_m.url;
-      this.program[i]["start_time"] = Date.parse(program[i].start_time);
-      this.program[i]["notice"] = 0;
+    for (var i = 0 ; i < program.length; i++) {
+
+      var new_program = {
+        title: program[i].title,
+        subtitle: program[i].subtitle,
+        icon: program[i].service.logo_m.url,
+        start_time: Date.parse(program[i].start_time),
+        notice: 0
+      }
+
+      this.program.push(new_program);
     }
   },
 
@@ -81,7 +85,6 @@
     var self = this;
     var api_key = localStorage["api_key"];
     var url = api_url + "?key=" + api_key;
-    console.log(url);
     $.ajax ({
       type: "GET",
       url : url.replace(/\s+/g, ""),
@@ -89,12 +92,11 @@
       success: function(msg) {
         for(var key in msg) {
           if (key == "list") {
-            self.dispatchList(msg.list, "list");
+            self.dispatchList(msg.list);
           } else if (key == "nowonair_list") {
-            var icon = msg.nowonair_list.g1.present.service.logo_m.url;
-            var title = msg.nowonair_list.g1.present.title;
-            var subtitle = msg.nowonair_list.g1.present.subtitle;
-            self.sendNotification(icon, title, subtitle);
+            self.sendNotification(msg.nowonair_list.g1.present.service.logo_m.url
+              , msg.nowonair_list.g1.present.title
+              , msg.nowonair_list.g1.present.subtitle);
           }
         }
       },
@@ -110,19 +112,19 @@
       switch(key) {
         case "g1":
           service = list.g1;
-          break;
+        break;
         case "e1":
           service = list.e1;
-          break;
+        break;
         case "s1":
           service = list.s1;
-          break;
+        break;
         case "s3":
           service = list.s3;
-          break;
+        break;
         case "r3":
           servive = list.r3;
-          break;
+        break;
         default:
           break;
       }
