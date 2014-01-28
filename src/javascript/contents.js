@@ -139,7 +139,7 @@
       popup.ondisplay = function(){
         setTimeout(function(){
           popup.cancel();
-        }, 5000);
+        }, 1000 * 30);
       };
       popup.show();
     } else {
