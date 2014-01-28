@@ -51,6 +51,7 @@
 
       this.program.push(new_program);
     }
+    console.log(this.program);
   },
 
   noticeProgram: function() {
@@ -123,7 +124,7 @@
           service = list.s3;
         break;
         case "r3":
-          servive = list.r3;
+          service = list.r3;
         break;
         default:
           break;
