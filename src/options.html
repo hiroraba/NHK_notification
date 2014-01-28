@@ -10,11 +10,24 @@
   <body>
     <div class="container">
       <h4>To use NHK notification. Please get apikey from <a href="http://api-portal.nhk.or.jp/ja">here</a>, and set below.</h3>
-      <form class="form-inline" role="form">
-        <div class="form-group">
-          <input type="password" class="form-control" id="api_key" placeholder="set api key">
-        </div>
-      <button type="submit" class="btn btn-success" id="save">save</button>
+      <form class="well" role="form">
+        <input type="password" class="form-control" id="api_key" placeholder="set api key">
+        <label class="checkbox">
+          <input type="checkbox" name="service" value="g1">NHK総合
+        </label>
+        <label class="checkbox">
+          <input type="checkbox" name="service" value="e1">Eテレ
+        </label>
+        <label class="checkbox">
+          <input type="checkbox" name="service" value="s1">NHKBS1
+        </label>
+        <label class="checkbox">
+          <input type="checkbox" name="service" value="s3">NHKBSプレミアム
+        </label>
+        <label class="checkbox">
+          <input type="checkbox" name="service" value="r3">NHK-FM
+        </label>
+        <button type="submit" class="btn btn-success" id="save">save</button>
       </form>
     </div>
   </body>
