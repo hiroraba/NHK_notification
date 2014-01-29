@@ -10,7 +10,7 @@
     var self = this;
     var service = localStorage["service"].split(",");
     $(function() {
-      self.getNowOnair();
+      self.getNowOnair(service);
       self.pollingProgram();
       for (var i = 0; i < service.length; i++) {
         self.getNHKprogram(service[i]);
@@ -39,13 +39,18 @@
   },
 
   saveNHKprogram: function(program) {
-    for (var i = 0 ; i < program.length; i++) {
+    var title = JSONSelect.match('.title', program);
+    var subtitle = JSONSelect.match('.subtitle', program);
+    var icon = JSONSelect.match('.service .logo_m .url', program);
+    var start_time = JSONSelect.match('.start_time', program);
+    
+    for (var i = 0 ; i < title.length; i++) {
 
       var new_program = {
-        title: program[i].title,
-        subtitle: program[i].subtitle,
-        icon: program[i].service.logo_m.url,
-        start_time: Date.parse(program[i].start_time),
+        title: title[i],
+        subtitle: subtitle[i],
+        icon: icon[i],
+        start_time: Date.parse(start_time[i]),
         notice: 0
       }
 
@@ -92,13 +97,7 @@
       datatype: 'json',
       success: function(msg) {
         for(var key in msg) {
-          if (key == "list") {
-            self.dispatchList(msg.list);
-          } else if (key == "nowonair_list") {
-            self.sendNotification(msg.nowonair_list.g1.present.service.logo_m.url
-              , msg.nowonair_list.g1.present.title
-              , msg.nowonair_list.g1.present.subtitle);
-          }
+          self.dispatch(msg, key)
         }
       },
       failure: function() {
@@ -107,33 +106,26 @@
     });
   },
 
-  dispatchList: function(list) {
+  dispatch: function(msg, key) {
     var self = this;
-    for (var key in list) {
-      switch(key) {
-        case "g1":
-          service = list.g1;
+    
+    switch(key){
+      case "list":
+        self.saveNHKprogram(msg);
         break;
-        case "e1":
-          service = list.e1;
+      case "nowonair_list":
+        var title = JSONSelect.match('.title', msg);
+        var subtitle = JSONSelect.match('.subtitle', msg);
+        var icon = JSONSelect.match('.present .service .logo_m .url', msg);
+        self.sendNotification(icon, title, subtitle);
         break;
-        case "s1":
-          service = list.s1;
-        break;
-        case "s3":
-          service = list.s3;
-        break;
-        case "r3":
-          service = list.r3;
-        break;
-        default:
-          break;
-      }
+      default:
+      break;
     }
-    self.saveNHKprogram(service);
   },
 
   sendNotification: function(icon,title,subtitle) {
+    console.log(icon);
     window.webkitNotifications.createNotification(icon, title, subtitle);
     if ( webkitNotifications.checkPermission() == 0 ) {
       var popup = webkitNotifications.createNotification(icon, title, subtitle);
