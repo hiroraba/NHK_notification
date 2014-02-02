@@ -3,7 +3,6 @@
   base_url_now : 'http://api.nhk.or.jp/v1/pg/now',
   base_url_list : 'http://api.nhk.or.jp/v1/pg/list',
   area : '130', //Tokyo
-  service: "g1",
   program: [],
 
   init : function(){
@@ -20,9 +19,10 @@
 
   getNowOnair: function() {
     var self = this;
-    var url_now = this.base_url_now + "/" + this.area + "/" + this.service + ".json";
-    $("#nhk").click(function(){
-      self.callApi(url_now);
+    var url_now = this.base_url_now + "/" + this.area + "/";
+    $("[name=now_service]").click(function(){
+       var service = $(this).attr("value");
+       self.callApi(url_now + service + ".json");
     });
   },
 
@@ -114,8 +114,8 @@
         self.saveNHKprogram(msg);
         break;
       case "nowonair_list":
-        var title = JSONSelect.match('.title', msg);
-        var subtitle = JSONSelect.match('.subtitle', msg);
+        var title = JSONSelect.match('.present .title', msg);
+        var subtitle = JSONSelect.match('.present .subtitle', msg);
         var icon = JSONSelect.match('.present .service .logo_m .url', msg);
         self.sendNotification(icon, title, subtitle);
         break;
