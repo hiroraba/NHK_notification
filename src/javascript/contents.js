@@ -45,7 +45,6 @@
     var start_time = JSONSelect.match('.start_time', program);
     
     for (var i = 0 ; i < title.length; i++) {
-
       var new_program = {
         title: title[i],
         subtitle: subtitle[i],
@@ -53,10 +52,8 @@
         start_time: Date.parse(start_time[i]),
         notice: 0
       }
-
       this.program.push(new_program);
     }
-    console.log(this.program);
   },
 
   noticeProgram: function() {
