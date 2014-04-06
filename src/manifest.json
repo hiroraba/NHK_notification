@@ -14,12 +14,8 @@
       "javascript/jsonselect.js",
       "javascript/contents.js"]
   },
-  "permissions": [
-    "tabs",
-    "http://*/"
-  ],
   "browser_action": {
-    "default_icon": "images/icon19.png",
+    "default_icon": "images/icon48.png",
     "default_popup": "popup.html"
   },
   "options_page": "options.html"
