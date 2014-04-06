@@ -59,9 +59,13 @@
   noticeProgram: function() {
     var self = this;
     var now = new Date();
+    var allowNotice = localStorage["allow_notice"];
+
     for (var i = 0 ; i < this.program.length; i++) {
       var diff = Math.abs(now - this.program[i]["start_time"]);
-      if (diff < 1000 * 20 && this.program[i]["notice"] == 0) {
+      if (diff < 1000 * 20 
+          && this.program[i]["notice"] == 0
+          && allowNotice == "on" ) {
         this.program[i]["notice"] = 1;
         self.sendNotification(this.program[i]["icon"], this.program[i]["title"], this.program[i]["subtitle"]);
       }

@@ -13,21 +13,37 @@
       <form class="well" role="form">
         <input type="password" class="form-control" id="api_key" placeholder="set api key">
         <label class="checkbox">
-          <input type="checkbox" name="service" value="g1">NHK総合
+          <input type="checkbox" name="notice" id="allowed_notice">don't send notification
         </label>
-        <label class="checkbox">
-          <input type="checkbox" name="service" value="e1">Eテレ
-        </label>
-        <label class="checkbox">
-          <input type="checkbox" name="service" value="s1">NHKBS1
-        </label>
-        <label class="checkbox">
-          <input type="checkbox" name="service" value="s3">NHKBSプレミアム
-        </label>
-        <label class="checkbox">
-          <input type="checkbox" name="service" value="r3">NHK-FM
-        </label>
-        <button type="submit" class="btn btn-success" id="save">save</button>
+        <h4>service send notification</h4>
+        <ul>
+          <li>
+          <label class="checkbox">
+            <input type="checkbox" name="service" value="g1">NHK総合
+          </label>
+          </li>
+          <li>
+          <label class="checkbox">
+            <input type="checkbox" name="service" value="e1">Eテレ
+          </label>
+          </li>
+          <li>
+          <label class="checkbox">
+            <input type="checkbox" name="service" value="s1">NHKBS1
+          </label>
+          </li>
+          <li>
+          <label class="checkbox">
+            <input type="checkbox" name="service" value="s3">NHKBSプレミアム
+          </label>
+          </li>
+          <li>
+          <label class="checkbox">
+            <input type="checkbox" name="service" value="r3">NHK-FM
+          </label>
+          </li>
+          <button type="submit" class="btn btn-success" id="save">save</button>
+        </ul>
       </form>
     </div>
   </body>
